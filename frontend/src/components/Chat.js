@@ -6,7 +6,7 @@ const URL = "ws://" + window.location.host + "/nb-ws/";
 
 class Chat extends Component {
   state = {
-    name: "Bob",
+    name: "Pepe",
     messages: [],
   };
   
