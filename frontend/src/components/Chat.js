@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import ChatInput from "./ChatInput";
 import ChatMessage from "./ChatMessage";
 
-const URL = "ws://localhost:3031";
+const URL = "ws://" + window.location.host + "/nb-ws/";
 
 class Chat extends Component {
   state = {
     name: "Bob",
     messages: [],
   };
-
+  
   ws = new WebSocket(URL);
 
   componentDidMount() {
