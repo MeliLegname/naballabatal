@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ChatInput from "./ChatInput";
 import ChatMessage from "./ChatMessage";
+import EmojiPicker from "emoji-picker-react";
 
 const URL = "ws://" + window.location.host + "/nb-ws/";
 
@@ -9,7 +10,7 @@ class Chat extends Component {
     name: "Pepe",
     messages: [],
   };
-  
+
   ws = new WebSocket(URL);
 
   componentDidMount() {
@@ -33,7 +34,7 @@ class Chat extends Component {
     };
   }
 
-  addMessage = message => this.setState(state => ({ messages: [message, ...state.messages] }));
+  addMessage = message => this.setState(state => ({ messages: [...state.messages, message] }));
 
   submitMessage = messageString => {
     // on submitting the ChatInput form, send the message, add it to the list and reset the input
@@ -41,10 +42,14 @@ class Chat extends Component {
     this.ws.send(JSON.stringify(message));
     this.addMessage(message);
   };
-
+  myCallback(code) {
+    debugger;
+    const emoji = String.fromCodePoint(`0x${code}`);
+    ChatInput.value += ` ${emoji}`;
+  }
   render() {
     return (
-      <div>
+      <div className="chat">
         <label htmlFor="name">
           Name:&nbsp;
           <input
@@ -55,10 +60,16 @@ class Chat extends Component {
             onChange={e => this.setState({ name: e.target.value })}
           />
         </label>
-        <ChatInput ws={this.ws} onSubmitMessage={messageString => this.submitMessage(messageString)} />
-        {this.state.messages.map((message, index) => (
-          <ChatMessage key={index} message={message.message} name={message.name} />
-        ))}
+        <div className="divChatMessage">
+          {this.state.messages.map((message, index) => (
+            <ChatMessage key={index} message={message.message} name={message.name} />
+          ))}
+        </div>
+
+        <ChatInput ws={this.ws} onSubmitMessage={messageString => this.submitMessage(messageString)}>
+          {}
+        </ChatInput>
+        <EmojiPicker onEmojiClick={this.myCallback} />
       </div>
     );
   }

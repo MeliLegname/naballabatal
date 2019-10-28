@@ -1,5 +1,7 @@
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
 }
 
 .App-logo {
@@ -8,7 +10,7 @@
   pointer-events: none;
 }
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -17,10 +19,47 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
 .App-link {
   color: #61dafb;
+}
+
+.chat {
+  background-color: rgb(221, 221, 221);
+  min-width: 80%;
+  min-height: 80vh;
+  margin: auto;
+  padding: 2rem;
+}
+
+.chat label {
+  margin: 1rem;
+}
+
+.chatInput {
+  background-color: yellow;
+  display: flex;
+  margin: 1rem;
+}
+.chatInput input {
+  min-height: 3rem;
+  padding: 0.5rem;
+}
+.chatInput input:first-child {
+  width: 100%;
+}
+
+.divChatMessage {
+  background-color: white;
+  border: 1px solid grey;
+  border-radius: 7px;
+  box-shadow: 10px 5px 5px rgba(87, 87, 87, 0.062);
+  margin: 1rem;
+  min-height: 80vh;
+}
+.chatMessage {
+  /* background-color: rgb(219, 255, 219); */
 }
 
 @keyframes App-logo-spin {
